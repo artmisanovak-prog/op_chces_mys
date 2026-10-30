@@ -22,3 +22,8 @@ kriva pohadka
 - [plamenak](doma/chces_mys/kriva_pohadka/plamenak.txt)
 - [panda](doma/chces_mys/kriva_pohadka/panda_a_vlk.txt)
 - [vlk](doma/chces_mys/kriva_pohadka/panda_a_vlk.txt)
+
+
+---
+
+[arc_lab](arc_lab/index.html)
