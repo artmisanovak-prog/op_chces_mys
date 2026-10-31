@@ -1,8 +1,9 @@
 # LABORATOR · Chceš MYŠ?
 
-Toto je pracovní katalog samostatných nástrojů a experimentů. Balíčky zůstávají oddělené, protože řeší odlišné úkoly: kvalitativní evidenci vztahů, záznam modelových běhů, práci s ARC mřížkami, slepé vyhodnocení a samostatný chemický retrieval baseline.
+Toto je pracovní katalog nástrojů, které mají pomoci použít metodu MYŠ při řešení dalších problémů. Cílem není znovu dokazovat MYŠ, ale vybrat konkrétní problém a použít k němu vhodnou pracovní plochu, model nebo vyhodnocovací nástroj. Balíčky zůstávají oddělené, protože dělají různé věci.
 
 ## Začni zde
+- [Praktický návod: co který nástroj dělá a kdy ho použít](JAK_ZACIT_A_CO_POUZIT.md)
 - [Katalog a vyhledávání](index.html)
 - [Nezávislé podrobné hodnocení nástrojů](HODNOCENI_NASTROJU.md)
 - [Stav přenosu zdrojových souborů](STAV_IMPORTU.md)
