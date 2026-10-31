@@ -4,23 +4,43 @@ Aktualizováno: 2026-10-31
 
 ## Nahráno do repozitáře
 
-- `index.html`: vyhledatelný katalog nástrojů, jejich zamýšleného použití, silných stránek a otevřených problémů.
-- `README.md`: přehled pracovního prostoru a provozní rozdíly.
-- Samostatné popisy pro modelové pracoviště, laboratorní prototyp, základní portál, ARC Lab, Gemini pilot, slepý test, lokální ARC evidenci, CASMI baseline, CASMI inventuru, MOUSE Lab Environment, relační pilot v2 a starší varianty.
-- `arc-mys-gemini/arc_mys_experiment.py` a `requirements.txt`.
-- `arc-mys-slepy-test/prepare_blind_set.py`, `evaluate_offline.py`, `run_blind_gemini.py` a `requirements.txt`.
+- Katalog `index.html` a přehled `README.md`.
+- Nezávislé hodnocení nástrojů v `HODNOCENI_NASTROJU.md`.
+- Popisy jednotlivých směrů a provozní limity v samostatných README.
+- Gemini pilot: `arc-mys-gemini/arc_mys_experiment.py` a `requirements.txt`.
+- Slepý test: `arc-mys-slepy-test/prepare_blind_set.py`, `evaluate_offline.py`, `run_blind_gemini.py` a `requirements.txt`.
 
-## Co ještě není importováno
+## Původní zdrojové soubory, které ještě chybí v repozitáři
 
-Původní HTML zdrojové soubory pro `modelove-pracoviste`, `laborator-prototyp`, `portal-zakladni`, `arc-lab` a `mys-lab-environment` zatím nebyly přeneseny z ZIPů. Totéž platí pro některé další Python zdroje a ukázková data. Jejich popisné README tedy zatím slouží jako dokumentace návrhu, ne jako potvrzení, že je v této složce k dispozici celý spustitelný balíček.
+Tyto soubory jsou v dodaných ZIP balíčcích, ale v cílové složce zatím nejsou přeneseny:
 
-## Proč je to uvedeno zvlášť
+- `modelove-pracoviste/index.html`
+- `laborator-prototyp/index.html`
+- `portal-zakladni/index.html`
+- `arc-lab/index.html`
+- `laborator-vztahu/index.html`
+- `mys-lab-environment/index.html`, `ui/style.css`, `ui/app.js`, `engine/run_experiment.py`, ukázková JSON konfigurace a obrazové/textové materiály
+- `arc-mys-lokalni/app.py`, ukázková data a spouštěcí soubor
+- `casmi/mys_casmi.py` a `casmi-inventura/inventura_dat.py`
+- zdrojové skripty starších Gemini, slepého testu 120 a relačního pilotu v2
+- obrazové materiály přibalené k laboratorním a ARC pilotním balíčkům
 
-Nechci vytvářet dojem, že lze otevřít nástroj, když jeho zdrojový soubor v repozitáři ještě není. Katalogové odkazy vedou na existující dokumentaci; chybějící zdroje se mají doplnit z původních ZIPů, nikoli nahradit falešnými soubory nebo domyšlenými implementacemi.
+Dokumentace je užitečný popis záměru a omezení, ale nenahrazuje chybějící zdrojový kód. Dokud tyto soubory nejsou nahrány, nepovažuj odkazy na samotné aplikace za potvrzené spustitelné nástroje.
 
-## Kontroly před použitím
+## Co je potřeba udělat při dokončení importu
 
-- Gemini skripty vyžadují `google-genai` a klíč v proměnné prostředí / Kaggle Secrets.
-- `prepare_blind_set.py` vybírá úlohy, jejichž testovací výstup je v lokálním zdrojovém JSON přítomen; nepoužívej jej přímo na veřejný test bez výstupů.
-- `evaluate_offline.py` očekává klíč odpovědí a predikce ve specifickém JSON/JSONL formátu.
+1. Přenést původní zdrojové soubory z příslušných ZIPů bez změny jejich obsahu.
+2. Zachovat odlišné varianty jako samostatné složky, pokud se liší chováním nebo experimentální metodou.
+3. Opravit relativní cesty podle nové struktury v `doma/LABORATOR/`.
+4. Otevřít každé HTML přes GitHub Pages a ověřit načítání dat, export/import a interní odkazy.
+5. Spustit Python skripty na malých demo datech a ověřit chybové stavy.
+6. Teprve po skutečném testu označit nástroj jako funkční.
+
+## Důležité rozdíly
+
+- Gemini skripty vyžadují internet a API klíč, takže nejsou offline soutěžním řešením.
+- Slepý evaluator může běžet offline, ale samotné generování predikcí potřebuje konkrétní model nebo API.
+- Statické ARC mřížky nejsou totéž co interaktivní ARC-AGI-3.
+- CASMI/MS-MS je oddělená chemická úloha.
 - Žádný výsledek není naměřený jen tím, že byl skript nahrán.
+- Nikdy neukládej API klíče, neveřejné testy ani answer keys do veřejného repozitáře.
