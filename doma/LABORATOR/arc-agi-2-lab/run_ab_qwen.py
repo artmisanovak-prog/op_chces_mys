@@ -4,7 +4,7 @@ import argparse, hashlib, json, random, re, time
 from pathlib import Path
 from typing import Any
 import torch
-from transformers import AutoProcessor, AutoModelForVision2Seq
+from transformers import AutoProcessor, AutoModelForImageTextToText
 
 SYSTEM = ("You solve ARC-AGI-2 grid transformations. Infer the rule from training "
           "examples and apply it to each test input. Return only JSON: "
@@ -25,18 +25,18 @@ def parse_predictions(text):
 def make_prompt(task, context=None):
     parts=[]
     if context:
-        parts.append("MOUSE WORKING CONTEXT. Treat as hypotheses about relations, not ARC answers. Use only if supported by ARC examples.\\n"+context)
+        parts.append("MOUSE WORKING CONTEXT. Treat as hypotheses about relations, not ARC answers. Use only if supported by ARC examples.\n"+context)
     parts.append("ARC training examples:")
     for i,pair in enumerate(task.get("train",[]),1):
-        parts.append("Example "+str(i)+"\\nINPUT:\\n"+json.dumps(pair["input"])+"\\nOUTPUT:\\n"+json.dumps(pair["output"]))
+        parts.append("Example "+str(i)+"\nINPUT:\n"+json.dumps(pair["input"])+"\nOUTPUT:\n"+json.dumps(pair["output"]))
     parts.append("ARC test inputs:")
     for i,pair in enumerate(task.get("test",[]),1):
-        parts.append("Test "+str(i)+"\\nINPUT:\\n"+json.dumps(pair["input"]))
+        parts.append("Test "+str(i)+"\nINPUT:\n"+json.dumps(pair["input"]))
     parts.append("Return "+str(len(task.get("test",[])))+" predictions in JSON under key predictions.")
-    return "\\n\\n".join(parts)
+    return "\n\n".join(parts)
 
 def generate(model, processor, prompt, max_tokens):
-    text=SYSTEM+"\\n\\n"+prompt
+    text=SYSTEM+"\n\n"+prompt
     messages=[{"role":"user","content":[{"type":"text","text":text}]}]
     try:
         inputs=processor.apply_chat_template(messages,tokenize=True,add_generation_prompt=True,return_tensors="pt",return_dict=True)
@@ -64,7 +64,7 @@ def run_branch(model,processor,folder,paths,outfile,branch,context,max_tokens):
             row={"branch":branch,"task_id":path.stem,"prompt":prompt,"raw_response":raw,
                  "parsed_predictions":pred,"expected_outputs":expected if scored else None,
                  "scored":scored,"exact_match":correct if scored else None,"seconds":round(seconds,3)}
-            out.write(json.dumps(row,ensure_ascii=False)+"\\n")
+            out.write(json.dumps(row,ensure_ascii=False)+"\n")
             summary["tasks_run"]+=1
             if scored:
                 summary["tasks_scored"]+=1; summary["exact_matches"]+=int(correct)
@@ -95,7 +95,7 @@ def main():
     context=context_path.read_text(encoding="utf-8") if context_path else None
     if context is not None and not context.strip(): raise SystemExit("MOUSE context file is empty.")
     processor=AutoProcessor.from_pretrained(args.model,trust_remote_code=True)
-    model=AutoModelForVision2Seq.from_pretrained(args.model,torch_dtype="auto",device_map="auto",trust_remote_code=True)
+    model=AutoModelForImageTextToText.from_pretrained(args.model,torch_dtype="auto",device_map="auto",trust_remote_code=True)
     model.eval()
     run_id=time.strftime("%Y%m%d-%H%M%S"); outdir=Path(args.out)/run_id; outdir.mkdir(parents=True,exist_ok=True)
     config={"run_id":run_id,"model":args.model,"split":args.split,"seed":args.seed,
