@@ -1,0 +1,54 @@
+{
+  "name": "MOUSE ROOM",
+  "version": "1.0.0",
+  "description": "Malá statická místnost pro generování, experimenty a porovnávání modelových výstupů.",
+  "entry": "index.html",
+  "architecture": {
+    "backend": false,
+    "database": false,
+    "storage": "localStorage + explicitní JSON export/import",
+    "state": "URL hash pro sdílitelný stav formulářů; hash s ID v laboratoři pouze vybírá lokální záznam",
+    "paths": "relativní",
+    "modelConnection": "ruční copy/paste do libovolného modelového rozhraní; žádné API klíče v HTML"
+  },
+  "tools": [
+    {
+      "id": "room-home",
+      "file": "index.html",
+      "purpose": "Rozcestník"
+    },
+    {
+      "id": "generator",
+      "file": "generator.html",
+      "purpose": "Karty, ilustrace, pohádky a generování promptu"
+    },
+    {
+      "id": "lab",
+      "file": "laborator.html",
+      "purpose": "Záznamy, větvení, pozorování a testy"
+    },
+    {
+      "id": "comparison",
+      "file": "porovnani.html",
+      "purpose": "Dvě varianty stejného zadání a kritéria"
+    },
+    {
+      "id": "docs",
+      "file": "dokumentace.html",
+      "purpose": "Technické poznámky"
+    }
+  ],
+  "sources": {
+    "illustrations": "../chces_mys/ilustrace/",
+    "fairyTales": "../chces_mys/kriva_pohadka/"
+  },
+  "storageKeys": [
+    "mouse_room_records"
+  ],
+  "notes": [
+    "HTML nástroje nevolají modelové API. Prompt se předává ručně, takže lze použít různá webová rozhraní.",
+    "Relativní odkazy na obrázky a pohádky fungují při hostování z repozitáře. Odkaz na text pohádky sám o sobě nepředává text do modelu.",
+    "localStorage je vázán na konkrétní prohlížeč a origin. Pro přenos exportuj JSON.",
+    "Neukládej tajné API klíče do statického HTML ani veřejného repozitáře."
+  ]
+}
