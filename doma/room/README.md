@@ -11,7 +11,9 @@
 - [Technická dokumentace](dokumentace.html)
 - [Manifest](manifest.json)
 
-## MYS WORKSHOP\n\n`workshop.html` načítá texty pohádek ze složky `../chces_mys/kriva_pohadka/`, vybírá zdroje podle zadání, vkládá jejich plný text do promptu a ukládá hotové výstupy do stejného lokálního deníku. Umí připravit prompt pro libovolné konverzační rozhraní nebo experimentálně volat kompatibilní chat-completions API. Přímé volání závisí na CORS a konfiguraci poskytovatele; API klíč se neukládá.\n\n## Princip
+## MYS WORKSHOP
+
+Workshop vytváří více paralelních kategorií výstupů z jednoho zadání (AI experimenty, benchmarky, datasety, metody, architektury, prototypy, produkty, herní systémy, vzdělávání, příběhy, analýzy a implementační plány). Ukládá jednotlivé artefakty do `localStorage` pod klíčem `mys_artifact_library`; knihovnu lze exportovat jako JSONL a záznamy použít jako kandidáty datasetu. Z uložené knihovny lze sestavit pracovní osnovu benchmarku. Výstupy zůstávají označené jako návrhy, dokud neprojdou testem. Pro přenos mezi zařízeními exportuj JSONL.\n\n`workshop.html` načítá texty pohádek ze složky `../chces_mys/kriva_pohadka/`, vybírá zdroje podle zadání, vkládá jejich plný text do promptu a ukládá hotové výstupy do stejného lokálního deníku. Umí připravit prompt pro libovolné konverzační rozhraní nebo experimentálně volat kompatibilní chat-completions API. Přímé volání závisí na CORS a konfiguraci poskytovatele; API klíč se neukládá.\n\n## Princip
 
 - **Karta jako API:** karta je přenosný vstupní objekt. Nástroje z něj skládají zadání a uchovávají původní text.
 - **URL jako stav:** generátor umí zakódovat stav formuláře do fragmentu URL. V laboratoři fragment vybírá ID lokálního záznamu, samotná data v URL nejsou.
