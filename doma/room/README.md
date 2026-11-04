@@ -2,7 +2,7 @@
 
 **Malá sada propojených statických nástrojů v `doma/room/`.** Není to velká platforma, nemá backend ani databázi.
 
-## Rozcestník
+## Rozcestník\n\n- [MYS WORKSHOP](workshop.html) – pracovní zakázka → výběr zdrojů → kompletní prompt → výstup od modelu.
 
 - [Otevřít ROOM](index.html)
 - [Generátor](generator.html)
@@ -11,7 +11,7 @@
 - [Technická dokumentace](dokumentace.html)
 - [Manifest](manifest.json)
 
-## Princip
+## MYS WORKSHOP\n\n`workshop.html` načítá texty pohádek ze složky `../chces_mys/kriva_pohadka/`, vybírá zdroje podle zadání, vkládá jejich plný text do promptu a ukládá hotové výstupy do stejného lokálního deníku. Umí připravit prompt pro libovolné konverzační rozhraní nebo experimentálně volat kompatibilní chat-completions API. Přímé volání závisí na CORS a konfiguraci poskytovatele; API klíč se neukládá.\n\n## Princip
 
 - **Karta jako API:** karta je přenosný vstupní objekt. Nástroje z něj skládají zadání a uchovávají původní text.
 - **URL jako stav:** generátor umí zakódovat stav formuláře do fragmentu URL. V laboratoři fragment vybírá ID lokálního záznamu, samotná data v URL nejsou.
