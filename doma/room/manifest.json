@@ -1,7 +1,7 @@
 {
   "name": "MOUSE ROOM",
-  "version": "1.0.0",
-  "description": "Malá statická místnost pro generování, experimenty a porovnávání modelových výstupů.",
+  "version": "1.1.0",
+  "description": "Pracovní prostředí MYS pro převod zadání na konkrétní výstupy s výběrem zdrojových pohádek a předáním modelu.",
   "entry": "index.html",
   "architecture": {
     "backend": false,
@@ -9,9 +9,14 @@
     "storage": "localStorage + explicitní JSON export/import",
     "state": "URL hash pro sdílitelný stav formulářů; hash s ID v laboratoři pouze vybírá lokální záznam",
     "paths": "relativní",
-    "modelConnection": "ruční copy/paste do libovolného modelového rozhraní; žádné API klíče v HTML"
+    "modelConnection": "kompletní prompt s vloženými texty pohádek pro libovolný chat; experimentální přímé kompatibilní chat-completions API bez ukládání klíče"
   },
   "tools": [
+    {
+      "id": "workshop",
+      "file": "workshop.html",
+      "purpose": "Pracovní zakázka, automatický výběr pohádek, přenos mechanismů, generování promptu a výstupu modelem"
+    },
     {
       "id": "room-home",
       "file": "index.html",
@@ -49,6 +54,7 @@
     "HTML nástroje nevolají modelové API. Prompt se předává ručně, takže lze použít různá webová rozhraní.",
     "Relativní odkazy na obrázky a pohádky fungují při hostování z repozitáře. Odkaz na text pohádky sám o sobě nepředává text do modelu.",
     "localStorage je vázán na konkrétní prohlížeč a origin. Pro přenos exportuj JSON.",
-    "Neukládej tajné API klíče do statického HTML ani veřejného repozitáře."
+    "Neukládej tajné API klíče do statického HTML ani veřejného repozitáře.",
+    "MYS WORKSHOP vybírá z textů pohádek, které se podařilo načíst. Panda a vlk jsou zatím v README, ale společný textový soubor nebyl dostupný."
   ]
 }
