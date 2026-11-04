@@ -1,12 +1,12 @@
 {
   "name": "MOUSE ROOM",
-  "version": "1.1.0",
-  "description": "Pracovní prostředí MYS pro převod zadání na konkrétní výstupy s výběrem zdrojových pohádek a předáním modelu.",
+  "version": "1.2.0",
+  "description": "MYS WORKSHOP generuje více kategorií pracovních artefaktů a postupně z nich buduje lokální knihovnu kandidátů datasetů a benchmarků.",
   "entry": "index.html",
   "architecture": {
     "backend": false,
     "database": false,
-    "storage": "localStorage + explicitní JSON export/import",
+    "storage": "localStorage + export/import souborů JSON/JSONL",
     "state": "URL hash pro sdílitelný stav formulářů; hash s ID v laboratoři pouze vybírá lokální záznam",
     "paths": "relativní",
     "modelConnection": "kompletní prompt s vloženými texty pohádek pro libovolný chat; experimentální přímé kompatibilní chat-completions API bez ukládání klíče"
@@ -15,7 +15,7 @@
     {
       "id": "workshop",
       "file": "workshop.html",
-      "purpose": "Pracovní zakázka, automatický výběr pohádek, přenos mechanismů, generování promptu a výstupu modelem"
+      "purpose": "Vícekategoriální generování artefaktů, lokální knihovna, export datasetu JSONL a návrh benchmarku"
     },
     {
       "id": "room-home",
@@ -55,6 +55,8 @@
     "Relativní odkazy na obrázky a pohádky fungují při hostování z repozitáře. Odkaz na text pohádky sám o sobě nepředává text do modelu.",
     "localStorage je vázán na konkrétní prohlížeč a origin. Pro přenos exportuj JSON.",
     "Neukládej tajné API klíče do statického HTML ani veřejného repozitáře.",
-    "MYS WORKSHOP vybírá z textů pohádek, které se podařilo načíst. Panda a vlk jsou zatím v README, ale společný textový soubor nebyl dostupný."
+    "MYS WORKSHOP vybírá z textů pohádek, které se podařilo načíst. Panda a vlk jsou zatím v README, ale společný textový soubor nebyl dostupný.",
+    "MYS WORKSHOP umí generovat více kategorií artefaktů na jedno zadání a ukládat atomické kandidátní záznamy do mys_artifact_library.",
+    "Dataset a benchmark exporty jsou pracovní kandidáti. Jejich obsah vyžaduje validaci, deduplikaci, verzi schématu a testování před publikací."
   ]
 }
