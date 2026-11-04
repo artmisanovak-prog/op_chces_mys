@@ -27,3 +27,10 @@ kriva pohadka
 ---
 
 [arc_lab](arc_lab/index.html)
+
+
+---
+
+## MOUSE ROOM
+
+Nová samostatná místnost s několika propojenými nástroji: [otevřít ROOM](doma/room/index.html) · [README](doma/room/README.md) · [manifest](doma/room/manifest.json)
