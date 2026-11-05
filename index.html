@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#20251f">
+<title>Chceš MYŠ? · Rozcestník</title>
+<style>
+:root{--ink:#20251f;--paper:#f3f0e7;--white:#fffdf7;--line:#d6d1c5;--acid:#c7f27a;--muted:#66695f;--soft:#e9eddf}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:var(--ink);color:var(--paper);padding:clamp(28px,7vw,76px) max(18px,calc((100vw - 1120px)/2))}
+header small{color:var(--acid);letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+h1{font-size:clamp(3rem,10vw,6.5rem);line-height:.88;letter-spacing:-.075em;margin:.35em 0}
+header p{max-width:720px;color:#d8dbd1;font-size:1.05rem}
+main{max-width:1120px;margin:auto;padding:28px 18px 64px}
+h2{font-size:1.55rem;letter-spacing:-.03em;margin:0 0 14px}
+.intro{max-width:780px;color:var(--muted);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{display:flex;flex-direction:column;gap:9px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:19px;min-height:190px}
+.card.primary{background:var(--soft);border-color:#bdc9b7}
+.tag{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:750}
+.card h3{font-size:1.2rem;margin:0}
+.card p{color:var(--muted);margin:0;font-size:.94rem}
+.card a{color:var(--ink);font-weight:750;text-decoration-thickness:1px;text-underline-offset:3px;margin-top:auto;padding-top:8px}
+.card a:hover{color:#496b42}
+.section{margin:38px 0}
+.note{background:#e9dfd1;border-radius:12px;padding:16px 18px;color:#49483f;margin:24px 0}
+.note a{color:inherit;font-weight:700}
+footer{border-top:1px solid var(--line);padding:20px 18px;color:var(--muted);font-size:.85rem}
+@media(max-width:520px){.card{min-height:0}}
+</style>
+</head>
+<body>
+<header>
+<small>Repo dům · op_chces_mys</small>
+<h1>Chceš<br>MYŠ?</h1>
+<p>Vstupní rozcestník k nástrojům, experimentům a pracovním prostorům. Jednotlivé části zůstávají samostatné: otevři přímo to, s čím chceš pracovat.</p>
+</header>
+<main>
+<p class="intro">Tady najdeš živé HTML nástroje, experimentální rozhraní i dokumentaci k projektům, které zatím nemají přenesenou spustitelnou aplikaci. U každého odkazu je uvedeno, co skutečně otevře.</p>
+
+<section class="section">
+<h2>Pracovní místnosti</h2>
+<div class="grid">
+<article class="card primary">
+<div class="tag">Více propojených nástrojů</div><h3>MOUSE ROOM</h3>
+<p>Samostatná pracovní místnost pro generování artefaktů, práci s pohádkami a ilustracemi, ukládání záznamů a porovnávání variant.</p>
+<a href="doma/room/index.html">Otevřít MOUSE ROOM →</a>
+</article>
+<article class="card">
+<div class="tag">Katalog a dokumentace</div><h3>LABORATOR</h3>
+<p>Katalog laboratorních projektů, jejich účelu, možností, technických omezení a stavu importu. Obsahuje vyhledávání podle názvu a typu nástroje.</p>
+<a href="doma/LABORATOR/index.html">Otevřít katalog LABORATORU →</a>
+</article>
+<article class="card">
+<div class="tag">ARC úlohy</div><h3>ARC Lab</h3>
+<p>Vizuální rozhraní pro import ARC JSON/ZIP, práci se dvěma vzdálenými modelovými endpointy a A/B porovnání. Není to samostatný model ani offline agent.</p>
+<a href="arc-lab/Index.html">Otevřít ARC Lab →</a>
+</article>
+</div>
+</section>
+
+<section class="section">
+<h2>Nástroje v MOUSE ROOM</h2>
+<div class="grid">
+<article class="card"><div class="tag">Generování</div><h3>MYS WORKSHOP</h3><p>Generuje různé pracovní artefakty z vybraných kategorií, pracuje s lokální knihovnou kandidátů a umožňuje export datasetu nebo návrhu benchmarku.</p><a href="doma/room/workshop.html">Otevřít WORKSHOP →</a></article>
+<article class="card"><div class="tag">Generování zadání</div><h3>Generátor</h3><p>Propojuje ilustraci, pohádku a další vstupy do přenosného zadání, které lze předat zvolenému modelu.</p><a href="doma/room/generator.html">Otevřít generátor →</a></article>
+<article class="card"><div class="tag">Záznam a větvení</div><h3>Laboratoř pokusů</h3><p>Umožňuje zakládat pokusy, vytvářet jejich větve, zapisovat pozorování a uchovávat různé cesty uvažování.</p><a href="doma/room/laborator.html">Otevřít laboratoř pokusů →</a></article>
+<article class="card"><div class="tag">Porovnávání</div><h3>Porovnávač</h3><p>Porovnává dvě varianty stejného zadání podle předem zvolených kritérií. Hodí se pro různé modely nebo různé instrukce.</p><a href="doma/room/porovnani.html">Otevřít porovnávač →</a></article>
+<article class="card"><div class="tag">Dokumentace</div><h3>Technické poznámky ROOM</h3><p>Popis architektury, ukládání dat, napojení modelů, relativních cest a známých omezení.</p><a href="doma/room/dokumentace.html">Otevřít dokumentaci →</a></article>
+</div>
+</section>
+
+<section class="section">
+<h2>Laboratorní experimenty</h2>
+<div class="grid">
+<article class="card"><div class="tag">HTML · ARC-AGI-2</div><h3>ARC-AGI-2 · MOUSE Lab</h3><p>Pracovní rozhraní pro konfiguraci a evidenci párového testu na statických ARC úlohách. Python skripty pro přípravu dat a A/B běh jsou dostupné vedle něj.</p><a href="doma/LABORATOR/arc-agi-2-lab/index.html">Otevřít pracovní plochu →</a></article>
+<article class="card"><div class="tag">Python · lokální</div><h3>Lokální ARC evidence</h3><p>Python aplikace pro práci s lokálními ARC daty a demo ukázkami. GitHub Pages ji nespustí; odkaz vede na návod a zdrojový kód.</p><a href="doma/LABORATOR/arc-mys-lokalni/README.md">Návod a soubory →</a></article>
+<article class="card"><div class="tag">Python · API</div><h3>ARC + Gemini pilot</h3><p>Experimentální skript pro volání Gemini API a ukládání predikcí. Vyžaduje internet a API klíč; klíč nevkládej do veřejného HTML.</p><a href="doma/LABORATOR/arc-mys-gemini/README_CZ.md">Návod a soubory →</a></article>
+<article class="card"><div class="tag">Offline vyhodnocení</div><h3>ARC · slepý test</h3><p>Příprava slepé sady a samostatné offline vyhodnocení uložených predikcí. Evaluátor sám odpovědi negeneruje.</p><a href="doma/LABORATOR/arc-mys-slepy-test/README_CZ.md">Návod a soubory →</a></article>
+<article class="card"><div class="tag">Python · výzkumné prostředí</div><h3>MOUSE Lab Environment</h3><p>Dokumentace běhového prostředí, které odděluje konfiguraci experimentu, materiály, běh skriptu a výsledky. Před použitím je nutné ověřit dostupnost implementovaných backendů.</p><a href="doma/LABORATOR/mys-lab-environment/README_CZ.md">Dokumentace →</a></article>
+<article class="card"><div class="tag">Katalog všech balíčků</div><h3>Další experimenty a prototypy</h3><p>Gemini varianty, relační piloty, CASMI nástroje, inventura dat, starší ARC prototypy a další laboratorní složky včetně jejich aktuálního stavu.</p><a href="doma/LABORATOR/index.html">Procházet celý katalog →</a></article>
+</div>
+<div class="note"><strong>Upozornění ke stavu:</strong> některé položky v LABORATORU mají zatím pouze README nebo zdrojové skripty, nikoli spustitelnou HTML aplikaci. Katalog LABORATORU uvádí, co je skutečně přítomné a co ještě čeká na import. Python aplikace neběží na GitHub Pages.</div>
+</section>
+
+<footer>Chceš MYŠ? · op_chces_mys · Rozcestník používá relativní odkazy, aby fungoval na GitHub Pages i při přesunu projektu pod jinou adresu.</footer>
+</main>
+</body>
+</html>
