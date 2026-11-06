@@ -34,3 +34,10 @@ kriva pohadka
 ## MOUSE ROOM
 
 Nová samostatná místnost s několika propojenými nástroji: [otevřít ROOM](doma/room/index.html) · [README](doma/room/README.md) · [manifest](doma/room/manifest.json)
+
+
+---
+
+## LABORATOŘ MOUSE OS
+
+[Otevřít MOUSE OS · Laboratoř](laborator/index.html) – pracovní prototyp pro multimodální vstupy, sémantické mezery, topologii vztahů, fyziku jazyka, abstrakci, přenos mechanismů, evidenci nejistoty, pracovní konfigurace myší a experimentální běhy.
