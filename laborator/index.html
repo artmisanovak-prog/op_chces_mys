@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#20251f"><title>MOUSE OS · Laboratoř</title>
+<style>
+:root{--ink:#20251f;--paper:#f3f0e7;--panel:#fffdf7;--line:#d6d1c5;--acid:#c7f27a;--muted:#686b62;--red:#a84b3f;--blue:#486b82}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 system-ui,-apple-system,sans-serif}header{background:var(--ink);color:var(--paper);padding:28px clamp(18px,5vw,58px)}header small,.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;color:var(--acid)}h1{font-size:clamp(2.8rem,9vw,5.8rem);letter-spacing:-.075em;line-height:.9;margin:14px 0}header p{max-width:760px;color:#d8dbd1;margin-bottom:0}main{max-width:1200px;margin:auto;padding:22px 16px 60px}.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab,button{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 13px;border-radius:9px;font:inherit;cursor:pointer}.tab.active,button.primary{background:var(--ink);color:white;border-color:var(--ink)}button.danger{color:var(--red)}button:disabled{opacity:.4;cursor:not-allowed}.page{display:none}.page.active{display:block}.layout{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.panel{grid-column:span 12;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:17px;min-width:0}.half{grid-column:span 6}.third{grid-column:span 4}h2{font-size:1.25rem;margin:0 0 12px}h3{font-size:1rem;margin:16px 0 7px}.muted,.hint{color:var(--muted);font-size:.88rem}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.row button,.row .fit{flex:0 0 auto}label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}input,textarea,select{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;background:white;color:var(--ink);font:inherit}textarea{min-height:92px;resize:vertical}.list{display:grid;gap:8px}.item{border:1px solid var(--line);border-radius:9px;padding:11px;background:#fff}.item.selected{outline:2px solid var(--ink)}.item strong{display:block}.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:2px 8px;font-size:.75rem;margin:3px 4px 3px 0}.meter{height:8px;background:#e5e1d7;border-radius:99px;overflow:hidden}.meter i{display:block;height:100%;background:var(--blue)}.node{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px;border-bottom:1px solid var(--line)}.node b{min-width:110px}.graph{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px}.graph .item{font-size:.85rem}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}.notice{background:#edf0e5;border-left:3px solid var(--blue);padding:10px 12px;border-radius:5px;font-size:.9rem}.dangertext{color:var(--red)}footer{border-top:1px solid var(--line);padding:18px;color:var(--muted);font-size:.85rem}@media(max-width:700px){.half,.third{grid-column:span 12}.tab{flex:1}.row>*{min-width:100%}.row button,.row .fit{min-width:auto}}
+</style></head>
+<body>
+<header><small>OP_CHCES_MYS / LABORATOR / PROTOTYP 0.1</small><h1>MOUSE OS</h1><p>Pracovní prostředí pro významové struktury, multimodální vstupy, mezery, topologické vztahy, jazykové vlastnosti a experimenty. Model je výpočetní jádro, MOUSE organizuje pracovní prostor a operace. Tento prototyp zatím provádí a eviduje operace lokálně; sám nevolá AI model.</p></header>
+<main>
+<nav class="bar" aria-label="Moduly">
+<button class="tab active" data-page="workspace">Pracovní prostor</button><button class="tab" data-page="mice">Myši a konfigurace</button><button class="tab" data-page="experiments">Experimenty</button><button class="tab" data-page="archive">Archiv / export</button>
+</nav>
+<section id="workspace" class="page active">
+<div class="layout">
+<div class="panel half"><h2>01 · Vstupní reprezentace</h2><p class="muted">Založ obrazový, textový nebo jiný vstup. Soubor se v této verzi neodesílá na server; ukládá se pouze popis a případný název souboru.</p>
+<label>Označení vstupu</label><input id="sourceName" placeholder="Např. ryba / rybí rap">
+<label>Modalita</label><select id="sourceType"><option>Text</option><option>Obraz</option><option>Zvuk</option><option>Video</option><option>Multimodální kombinace</option><option>Jiná</option></select>
+<label>Obsah / pozorování / popis</label><textarea id="sourceContent" placeholder="Co je skutečně ve vstupu? Odděl pozorování od interpretace."></textarea>
+<div class="row"><button class="primary" id="addSource">Uložit vstup</button><span class="hint" id="sourceCount">0 vstupů</span></div><div class="list" id="sources"></div></div>
+<div class="panel half"><h2>02 · Sémantická mezera</h2><p class="muted">Mezera je samostatný pracovní objekt. Urči, mezi čím vzniká a jakého je typu.</p>
+<label>První reprezentace</label><select id="gapA"></select><label>Druhá reprezentace</label><select id="gapB"></select>
+<label>Typ mezery</label><select id="gapType"><option>Informační</option><option>Reprezentační</option><option>Sémantická</option><option>Strukturální</option><option>Konfliktní</option><option>Potenciální</option></select>
+<label>Co mezi nimi vzniká / chybí?</label><textarea id="gapNote" placeholder="Popiš rozdíl, rozpor, chybějící vztah nebo nový význam."></textarea>
+<button class="primary" id="addGap">Založit mezeru</button><div class="list" id="gaps"></div></div>
+<div class="panel half"><h2>03 · Topologie vztahů</h2><p class="muted">Vytvářej uzly a explicitní hrany. V této verzi jde o relační graf, nikoli o plnohodnotnou matematickou topologii.</p>
+<label>Nový uzel</label><div class="row"><input id="nodeName" placeholder="Název prvku"><select id="nodeKind"><option>Pozorování</option><option>Interpretace</option><option>Hypotéza</option><option>Mechanismus</option><option>Abstrakce</option></select><button id="addNode" class="primary">Přidat</button></div>
+<label>Propojit uzly</label><div class="row"><select id="edgeA"></select><select id="edgeRelation"><option>souvisí s</option><option>je v rozporu s</option><option>je součástí</option><option>transformuje</option><option>způsobuje</option><option>je analogií</option><option>vyplývá z</option></select><select id="edgeB"></select><button id="addEdge">Propojit</button></div>
+<div class="graph" id="graph"></div><div id="edges" class="list"></div></div>
+<div class="panel half"><h2>04 · Fyzika jazyka</h2><p class="muted">Pracovní parametry jsou zatím hypotetické indexy 0–100. Nejde o fyzikální měření. U každého parametru si zapisuj, jakou operaci ovlivňuje.</p>
+<label>Vybraný uzel</label><select id="physicsNode"></select>
+<div id="physicsControls"></div><label>Operativní definice / důsledek změny</label><textarea id="physicsMeaning" placeholder="Např. vyšší křehkost znamená, že malá změna kontextu může rozpadnout interpretaci."></textarea>
+<button class="primary" id="savePhysics">Uložit vlastnosti</button></div>
+<div class="panel half"><h2>05 · Abstrakce a přenos</h2><label>Výchozí konkrétní situace</label><select id="abstractSource"></select>
+<label>Abstrahovaná struktura</label><textarea id="abstractStructure" placeholder="Co zůstává zachováno, když odstraníš konkrétní objekty?"></textarea>
+<label>Cílová oblast / nový problém</label><textarea id="abstractTarget" placeholder="Kam chceš mechanismus přenést?"></textarea>
+<label>Funkční ověření</label><textarea id="abstractTest" placeholder="Jak poznáš, že mechanismus v cílové oblasti skutečně funguje?"></textarea>
+<button class="primary" id="saveTransfer">Uložit návrh přenosu</button><div id="transfers" class="list"></div></div>
+<div class="panel half"><h2>06 · Nejistota a původ tvrzení</h2><label>Tvrzení nebo interpretace</label><textarea id="claimText" placeholder="Zapiš konkrétní tvrzení."></textarea>
+<label>Stav</label><select id="claimStatus"><option>Přímé pozorování</option><option>Interpretace</option><option>Hypotéza</option><option>Neověřeno</option><option>Vyvráceno</option></select>
+<label>Zdroj / opora</label><input id="claimSource" placeholder="Vstup, uzel, externí zdroj nebo experiment">
+<button class="primary" id="addClaim">Zaznamenat tvrzení</button><div id="claims" class="list"></div></div>
+</div></section>
+<section id="mice" class="page"><div class="layout">
+<div class="panel half"><h2>Pracovní identity</h2><label>Název myši</label><input id="mouseName" placeholder="Např. Myš topologická">
+<label>Původ</label><select id="mouseOrigin"><option>Original · člověk</option><option>Assigned · přidělená</option><option>Self-generated · vytvořená modelem</option><option>Derived · odvozená</option></select>
+<label>Model / prostředí</label><input id="mouseModel" placeholder="Model a verze, nebo nezávislá">
+<label>Pracovní konfigurace</label><textarea id="mouseConfig" placeholder="Jak myš pracuje s topologií, mezerou, fyzikou jazyka, abstrakcí, nejistotou a modalitami?"></textarea>
+<label>Rodičovské myši (ID, oddělená čárkou)</label><input id="mouseParents" placeholder="M-001, M-004">
+<button class="primary" id="addMouse">Vytvořit myš</button></div>
+<div class="panel half"><h2>Registr myší</h2><p class="muted">Identita je stabilní, verze konfigurace se může měnit. Konkrétní použití patří do experimentálního běhu.</p><div id="mouseList" class="list"></div></div>
+<div class="panel"><h2>Editor verze vybrané myši</h2><div id="mouseDetail" class="empty">Vyber myš v registru.</div></div>
+</div></section>
+<section id="experiments" class="page"><div class="layout">
+<div class="panel half"><h2>Nový experimentální běh</h2><label>Experiment / otázka</label><input id="expTitle" placeholder="Co ověřuji?">
+<label>Model</label><input id="expModel" placeholder="Název a verze modelu">
+<label>Podmínka</label><select id="expCondition"><option>Baseline · bez myši</option><option>Myš přidělená člověkem</option><option>Myš vytvořená modelem</option><option>Myš upravovaná během práce</option><option>Kombinace myší</option></select>
+<label>Konkrétní myš / verze</label><select id="expMouse"></select>
+<label>Úloha a podmínky</label><textarea id="expTask" placeholder="Vstup, instrukce, limity, stejné podmínky pro srovnání."></textarea>
+<label>Výstup modelu</label><textarea id="expOutput" placeholder="Vlož výstup modelu."></textarea>
+<label>Výsledek / metriky / pozorování</label><textarea id="expResult" placeholder="Správnost, kroky, přenos mechanismu, chyby, náklady..."></textarea>
+<button class="primary" id="addExperiment">Uložit běh</button></div>
+<div class="panel half"><h2>Historie běhů</h2><div id="expList" class="list"></div></div>
+</div></section>
+<section id="archive" class="page"><div class="layout"><div class="panel"><h2>Lokální archiv</h2><p class="notice">Data se ukládají v tomto prohlížeči a zařízení. Nejsou automaticky nahrávána do GitHubu ani sdílena s jinými uživateli. Pravidelně exportuj zálohu.</p><div class="row"><button class="primary" id="exportData">Exportovat JSON</button><label class="fit">Import JSON <input type="file" id="importData" accept="application/json"></label><button class="danger" id="clearData">Smazat lokální data</button></div><p id="archiveStatus" class="muted"></p><h3>Co archiv obsahuje</h3><div id="archiveStats" class="graph"></div></div></div></section>
+</main><footer>MOUSE OS · Laboratorní prototyp · lokální úložiště · bez backendu a bez automatického volání AI modelů.</footer>
+<script>
+(()=>{'use strict';
+const KEY='mouse_os_lab_v01';
+const fresh=()=>({sources:[],gaps:[],nodes:[],edges:[],transfers:[],claims:[],mice:[],experiments:[]});
+let db;try{db=JSON.parse(localStorage.getItem(KEY))||fresh()}catch{db=fresh()}
+const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const id=p=>p+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,6);
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(db));render()};
+const opts=(arr,placeholder)=>'<option value="">'+placeholder+'</option>'+arr.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name||x.title||x.id)+'</option>').join('');
+function render(){
+$('sources').innerHTML=db.sources.map(x=>'<div class="item"><strong>'+esc(x.name)+'</strong><span class="pill">'+esc(x.type)+'</span><p>'+esc(x.content)+'</p><button class="danger" data-del="sources" data-id="'+x.id+'">Smazat</button></div>').join('')||'<div class="empty">Zatím žádné vstupy.</div>';
+$('sourceCount').textContent=db.sources.length+' vstupů';
+$('gapA').innerHTML=opts(db.sources,'Vyber vstup');$('gapB').innerHTML=opts(db.sources,'Vyber vstup');$('abstractSource').innerHTML=opts(db.sources,'Vyber vstup');
+$('gaps').innerHTML=db.gaps.map(x=>'<div class="item"><strong>'+esc(x.type)+' mezera</strong><p>'+esc(x.aName)+' ↔ '+esc(x.bName)+'</p>'+esc(x.note)+'</div>').join('')||'<div class="empty">Žádné mezery nejsou zaznamenané.</div>';
+$('edgeA').innerHTML=opts(db.nodes,'První uzel');$('edgeB').innerHTML=opts(db.nodes,'Druhý uzel');$('physicsNode').innerHTML=opts(db.nodes,'Vyber uzel');
+$('graph').innerHTML=db.nodes.map(n=>'<div class="item"><strong>'+esc(n.name)+'</strong><span class="pill">'+esc(n.kind)+'</span></div>').join('')||'<div class="empty">Graf zatím nemá uzly.</div>';
+$('edges').innerHTML=db.edges.map(e=>'<div class="node"><b>'+esc(nameNode(e.a))+'</b><span> '+esc(e.rel)+' </span><b>'+esc(nameNode(e.b))+'</b></div>').join('');
+$('transfers').innerHTML=db.transfers.map(t=>'<div class="item"><strong>'+esc(t.sourceName)+' → '+esc(t.target)+'</strong><p>'+esc(t.structure)+'</p><span class="muted">Test: '+esc(t.test)+'</span></div>').join('');
+$('claims').innerHTML=db.claims.map(c=>'<div class="item"><strong>'+esc(c.text)+'</strong><span class="pill">'+esc(c.status)+'</span><p class="muted">Původ: '+esc(c.source)+'</p></div>').join('');
+$('mouseList').innerHTML=db.mice.map(m=>'<div class="item"><strong>'+esc(m.name)+' <span class="pill">'+esc(m.origin)+'</span></strong><p class="muted">'+esc(m.id)+' · '+esc(m.model)+' · '+m.versions.length+' verzí</p><button data-selectmouse="'+m.id+'">Otevřít</button></div>').join('')||'<div class="empty">Zatím žádné myši.</div>';
+$('expMouse').innerHTML=opts(db.mice,'Bez myši / baseline');
+$('expList').innerHTML=db.experiments.map(e=>'<div class="item"><strong>'+esc(e.title)+'</strong><span class="pill">'+esc(e.condition)+'</span><p class="muted">'+esc(e.model)+' · '+esc(e.mouseName||'baseline')+' · '+esc(e.id)+'</p><p>'+esc(e.result)+'</p></div>').join('')||'<div class="empty">Zatím žádné experimenty.</div>';
+$('archiveStats').innerHTML=Object.entries(db).map(([k,v])=>'<div class="item"><strong>'+v.length+'</strong>'+esc(k)+'</div>').join('');
+}
+function nameNode(n){return db.nodes.find(x=>x.id===n)?.name||'?' }
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab,.page').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.page).classList.add('active')}));
+$('addSource').onclick=()=>{let name=$('sourceName').value.trim(),content=$('sourceContent').value.trim();if(!name||!content)return alert('Doplň označení a obsah vstupu.');db.sources.push({id:id('S'),name,type:$('sourceType').value,content});$('sourceName').value='';$('sourceContent').value='';save()};
+$('addGap').onclick=()=>{let a=db.sources.find(x=>x.id===$('gapA').value),b=db.sources.find(x=>x.id===$('gapB').value),note=$('gapNote').value.trim();if(!a||!b||!note)return alert('Vyber oba vstupy a popiš mezeru.');db.gaps.push({id:id('G'),a:a.id,b:b.id,aName:a.name,bName:b.name,type:$('gapType').value,note});$('gapNote').value='';save()};
+$('addNode').onclick=()=>{let name=$('nodeName').value.trim();if(!name)return;db.nodes.push({id:id('N'),name,kind:$('nodeKind').value,physics:{}});$('nodeName').value='';save()};
+$('addEdge').onclick=()=>{let a=$('edgeA').value,b=$('edgeB').value;if(!a||!b||a===b)return alert('Vyber dva různé uzly.');db.edges.push({id:id('R'),a,b,rel:$('edgeRelation').value});save()};
+const props=[['Pružnost','flexibility'],['Křehkost','fragility'],['Viskozita','viscosity'],['Propustnost','permeability'],['Setrvačnost','inertia'],['Stabilita','stability']];
+$('physicsNode').onchange=()=>{let n=db.nodes.find(x=>x.id===$('physicsNode').value);$('physicsControls').innerHTML=n?props.map(([label,key])=>'<label>'+label+' <output id="out_'+key+'">'+(n.physics[key]??50)+'</output></label><input type="range" min="0" max="100" value="'+(n.physics[key]??50)+'" data-physics="'+key+'">').join(''):'<p class="muted">Nejprve vyber uzel.</p>';document.querySelectorAll('[data-physics]').forEach(i=>i.oninput=()=>{$('out_'+i.dataset.physics).value=i.value})};
+$('savePhysics').onclick=()=>{let n=db.nodes.find(x=>x.id===$('physicsNode').value);if(!n)return alert('Vyber uzel.');n.physics={};document.querySelectorAll('[data-physics]').forEach(i=>n.physics[i.dataset.physics]=Number(i.value));n.physicsMeaning=$('physicsMeaning').value;save()};
+$('saveTransfer').onclick=()=>{let s=db.sources.find(x=>x.id===$('abstractSource').value),structure=$('abstractStructure').value.trim(),target=$('abstractTarget').value.trim(),test=$('abstractTest').value.trim();if(!s||!structure||!target)return alert('Vyber zdroj, strukturu a cílovou oblast.');db.transfers.push({id:id('T'),source:s.id,sourceName:s.name,structure,target,test});$('abstractStructure').value='';$('abstractTarget').value='';$('abstractTest').value='';save()};
+$('addClaim').onclick=()=>{let text=$('claimText').value.trim();if(!text)return;db.claims.push({id:id('C'),text,status:$('claimStatus').value,source:$('claimSource').value});$('claimText').value='';$('claimSource').value='';save()};
+$('addMouse').onclick=()=>{let name=$('mouseName').value.trim(),config=$('mouseConfig').value.trim();if(!name||!config)return alert('Vyplň název a pracovní konfiguraci.');let m={id:id('M'),name,origin:$('mouseOrigin').value,model:$('mouseModel').value,parents:$('mouseParents').value,versions:[{version:1,config,created:new Date().toISOString()}]};db.mice.push(m);$('mouseName').value='';$('mouseConfig').value='';$('mouseModel').value='';$('mouseParents').value='';save();showMouse(m.id)};
+function showMouse(mid){let m=db.mice.find(x=>x.id===mid);if(!m)return;$('mouseDetail').innerHTML='<h3>'+esc(m.name)+' · '+esc(m.id)+'</h3><p class="muted">'+esc(m.origin)+' · '+esc(m.model)+' · rodiče: '+esc(m.parents||'neuvedeni')+'</p>'+m.versions.map(v=>'<div class="item"><strong>Verze '+v.version+'</strong><p>'+esc(v.config)+'</p><span class="muted">'+esc(v.created)+'</span></div>').join('')+'<label>Nová konfigurace / změna</label><textarea id="newMouseConfig"></textarea><button class="primary" id="newMouseVersion">Uložit jako další verzi</button>';$('newMouseVersion').onclick=()=>{let c=$('newMouseConfig').value.trim();if(!c)return;m.versions.push({version:m.versions.length+1,config:c,created:new Date().toISOString()});save();showMouse(mid)}}
+document.addEventListener('click',e=>{let b=e.target.closest('[data-selectmouse]');if(b)showMouse(b.dataset.selectmouse);let d=e.target.closest('[data-del]');if(d){db[d.dataset.del]=db[d.dataset.del].filter(x=>x.id!==d.dataset.id);save()}});
+$('addExperiment').onclick=()=>{let title=$('expTitle').value.trim(),task=$('expTask').value.trim();if(!title||!task)return alert('Doplň název a zadání experimentu.');let m=db.mice.find(x=>x.id===$('expMouse').value);db.experiments.push({id:id('E'),title,model:$('expModel').value,condition:$('expCondition').value,mouse:m?.id||null,mouseName:m?m.name+' v'+m.versions.length:'',task,output:$('expOutput').value,result:$('expResult').value,created:new Date().toISOString()});$('expTitle').value='';$('expTask').value='';$('expOutput').value='';$('expResult').value='';save()};
+$('exportData').onclick=()=>{let blob=new Blob([JSON.stringify({format:'MOUSE-OS-LAB-1',exported:new Date().toISOString(),data:db},null,2)],{type:'application/json'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='mouse-os-laborator.json';a.click();URL.revokeObjectURL(url);$('archiveStatus').textContent='Export připraven.'};
+$('importData').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text()),d=x.data||x;if(!d.sources||!d.mice||!d.experiments)throw Error('Neplatná struktura');if(!confirm('Import nahradí současná lokální data. Pokračovat?'))return;db=d;save();$('archiveStatus').textContent='Import dokončen.'}catch(err){alert('Import se nepodařil: '+err.message)}e.target.value=''};
+$('clearData').onclick=()=>{if(confirm('Opravdu smazat všechna lokální data tohoto nástroje?')){db=fresh();save();$('archiveStatus').textContent='Lokální data smazána.'}};
+render();
+})();
+</script></body></html>
